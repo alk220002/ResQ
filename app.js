@@ -8,6 +8,8 @@ document.addEventListener("DOMContentLoaded", function () {
         
         // Hier könnte eine API wie OpenStreetMap oder Google Maps integriert werden
         mapContainer.innerHTML = "<p>Karte wird hier geladen...</p>";
+        mapContainer.style.height = "400px";
+        mapContainer.style.backgroundColor = "#e0e0e0";
     }
 
     // Impressum/DSGVO anzeigen
