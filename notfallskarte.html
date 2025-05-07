@@ -127,19 +127,18 @@
             <div id="map"></div>
             <div class="filter-container">
                 <button id="filter-police">
-                    <img src="images/police-icon.png" alt="Polizei">
+                    <img src="images/Polizei_Icon.png" alt="Polizei">
                     Zeige nur Polizei
                 </button>
                 <button id="filter-hospital">
-                    <img src="images/hospital-icon.png" alt="Krankenhaus">
+                    <img src="images/Krankenhaus_Icon.png" alt="Krankenhaus">
                     Zeige nur Krankenhäuser
                 </button>
                 <button id="filter-fire">
-                    <img src="images/fire-icon.png" alt="Feuerwehr">
+                    <img src="images/Feuerwehr_Icon.png" alt="Feuerwehr">
                     Zeige nur Feuerwehr
                 </button>
                 <button id="filter-all">
-                    <img src="images/all-icon.png" alt="Alle">
                     Zeige alle
                 </button>
             </div>
@@ -173,9 +172,9 @@
         // Marker hinzufügen
         locations.forEach(location => {
             const icon = L.icon({
-                iconUrl: location.type === 'police' ? 'images/police-marker.png' :
-                         location.type === 'hospital' ? 'images/hospital-marker.png' :
-                         'images/fire-marker.png',
+                iconUrl: location.type === 'police' ? 'images/Polizei_Marker.png' :
+                         location.type === 'hospital' ? 'images/Krankenhaus_Marker.png' :
+                         'images/Feuerwehr_Marker.png',
                 iconSize: [32, 32]
             });
 
