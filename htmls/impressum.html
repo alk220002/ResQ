@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <script src="mobile.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Impressum - ResQ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css" id="main-stylesheet">
+    <script src="../js/mobile.js"></script>
+
+   <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ff6f61;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .navbar__logo img {
+            height: 40px; /* Definierte Höhe für das Logo */
+            width: auto;  /* Breite wird proportional angepasst */
+            margin-right: 10px;
+        }
+
+        .navbar__menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar__menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .navbar__menu a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        h1, h2 {
+            color: #ff6f61;
+            text-align: center;
+        }
+
+        .team-section, .impressum-section, .dsgvo-section {
+            margin-bottom: 60px;
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-title {
+            position: relative;
+            margin-bottom: 40px;
+            padding-bottom: 15px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 4px;
+            background-color: #ff6f61;
+            border-radius: 2px;
+        }
+
+        .team-member {
+            display: flex;
+            align-items: center;
+            margin-bottom: 20px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-member img {
+            width: 150px;  /* erhöht von 100px */
+            height: 150px; /* erhöht von 100px */
+            border-radius: 50%;
+            margin-right: 20px;
+            object-fit: cover; /* stellt sicher, dass die Bilder richtig skaliert werden */
+            border: 4px solid white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .team-info {
+            padding-left: 30px;
+        }
+
+        .team-member h3 {
+            margin: 0;
+            font-size: 20px;
+            color: #ff6f61;
+            margin-bottom: 10px;
+        }
+
+        .team-member p {
+            margin: 5px 0 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .section-content {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .dsgvo-section .section-content {
+            line-height: 1.6;
+        }
+
+        .dsgvo-section h3 {
+            color: #ff6f61;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .dsgvo-section ul {
+            padding-left: 20px;
+            margin-bottom: 20px;
+        }
+
+        .dsgvo-section li {
+            margin-bottom: 8px;
+        }
+
+        .impressum-section a {
+            color: #ff6f61;
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.3s ease;
+        }
+
+        .impressum-section a:hover {
+            color: #e85a52;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+       <a href="index.html" class="navbar__logo">
+    <img src="../images/ResQ_Logo.png" alt="ResQ Logo">
+    ResQ
+</a>
+            
+        </a>
+        <ul class="navbar__menu">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="notfalldienste.html">Notfalldienste</a></li>
+            <li><a href="notfallskarte.html">Notfallskarte</a></li>
+            <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+            <li><a href="suchfunktion.html">Suchfunktion</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <h1>Impressum</h1>
+
+        <!-- Team Section -->
+        <section class="team-section">
+            <h2>Unser Team:</h2>
+            <div class="team-member">
+                <img src="../images/Msari_Foto.png" alt="Teammitglied">
+                <div>
+                    <h3>Msari Alkaabi</h3>
+                    <p>Medieninhaber und Herausgeber gemäß § 5 ECG und § 25 Mediengesetz:</p>
+                    <p style="margin-left: 20px;">
+                        Website: ResQ<br>
+                        Name: Msari Alkaabi<br>
+                        Adresse: Spengergasse 1050<br>
+                        E-Mail: alk220002@spengergasse.at<br>
+                        Telefon: +43 1 54615 0
+                    </p>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="../images/Helena_Foto.png" alt="Teammitglied">
+                <div>
+                    <h3>Helena Subasic</h3>
+                    <p>Medieninhaber und Herausgeber gemäß § 5 ECG und § 25 Mediengesetz:</p>
+                    <p style="margin-left: 20px;">
+                        Website: ResQ<br>
+                        Name: Helena Subasic<br>
+                        Adresse: Spengergasse 1050<br>
+                        E-Mail: sub2642@spengergasse.at<br>
+                        Telefon: +43 1 54615 0
+                    </p>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="../images/Beyza_Foto.png" alt="Teammitglied">
+                <div>
+                    <h3>Beyza Ersen</h3>
+                    <p>Medieninhaber und Herausgeber gemäß § 5 ECG und § 25 Mediengesetz:</p>
+                    <p style="margin-left: 20px;">
+                        Website: ResQ<br>
+                        Name: Beyza Ersen<br>
+                        Adresse: Spengergasse 1050<br>
+                        E-Mail: ers210436@spengergasse.at<br>
+                        Telefon: +43 1 54615 0
+                    </p>
+                </div>
+            </div>
+            <div class="team-member">
+                <img src="../images/Brian_Foto.png" alt="Teammitglied">
+                <div>
+                    <h3>Brian Cerny</h3>
+                    <p>Medieninhaber und Herausgeber gemäß § 5 ECG und § 25 Mediengesetz:</p>
+                    <p style="margin-left: 20px;">
+                        Website: ResQ<br>
+                        Name: Brian Cerny<br>
+                        Adresse: Spengergasse 1050<br>
+                        E-Mail: cer220009@spengergasse.at<br>
+                        Telefon: +43 1 54615 0
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Impressum Section -->
+        <section class="impressum-section">
+            <h2>Impressum der HTL-Spengergasse:</h2>
+            <div class="section-content">
+           <p><a href="https://www.spengergasse.at/?page_id=2030" target="_blank">HTL-SPENGERGASSE</a></p>
+         <p> Die folgende Website ist nur ein Schülerprojekt.</p>
+
+            </div>
+        </section>
+
+        <!-- DSGVO Section -->
+        <section class="dsgvo-section">
+            <h2>DSGVO:</h2>
+            <div class="section-content">
+                <p><strong>ResQ</strong><br>
+                Stand: 17.05.2025</p>
+
+                <p>Wir freuen uns über Ihr Interesse an unserer Website. Der Schutz Ihrer personenbezogenen Daten ist uns ein wichtiges Anliegen. Nachfolgend informieren wir Sie ausführlich über den Umgang mit Ihren Daten.</p>
+
+                <h3>1. Verantwortlicher</h3>
+                <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br>
+                Name: Msari Alkaabi<br>
+                Ort: Spengergasse 1050<br>
+                E-Mail: alk220002@spengergasse.at</p>
+
+                <h3>2. Erhebung und Speicherung personenbezogener Daten sowie Art und Zweck der Verwendung</h3>
+                <p>Beim Besuch unserer Website werden automatisch Informationen erfasst, die Ihr Browser an unseren Server übermittelt. Diese Informationen (sogenannte Server-Logfiles) umfassen:</p>
+                <ul>
+                    <li>Ihre IP-Adresse</li>
+                    <li>Datum und Uhrzeit des Zugriffs</li>
+                    <li>Name und URL der abgerufenen Datei</li>
+                    <li>Website, von der aus der Zugriff erfolgt (Referrer-URL)</li>
+                    <li>Verwendeter Browser und ggf. das Betriebssystem Ihres Endgeräts</li>
+                </ul>
+
+                <p><strong>Zweck der Verarbeitung:</strong><br>
+                Die Daten werden ausschließlich zur Sicherstellung eines störungsfreien Betriebs der Website und zur Verbesserung unseres Angebots verwendet. Eine Zuordnung dieser Daten zu einer bestimmten Person erfolgt nicht.</p>
+
+                <h3>3. Cookies</h3>
+                <p>Derzeit verwenden wir keine Cookies. Sollten wir zukünftig Cookies einsetzen, werden wir Sie hierüber in dieser Datenschutzerklärung informieren und, sofern erforderlich, Ihre Einwilligung einholen.</p>
+
+                <h3>4. Nutzung von Drittanbieter-Diensten</h3>
+                <p>Unsere Website ist eine statische HTML-Website, die ohne Content-Management-System oder externe Plugins betrieben wird. Wir hosten die Website selbstständig und verwenden keine Dienste von Drittanbietern für den Betrieb der Website.</p>
+
+<p>Die einzigen externen Ressourcen, die wir verwenden, sind:</p>
+<ul>
+    <li>Schriftarten von Google Fonts</li>
+    <li>Icons von Font Awesome</li>
+</ul>
+
+<p>Diese Ressourcen werden lokal auf unserem Server gehostet, um die Datenschutzanforderungen zu erfüllen und keine direkten Verbindungen zu externen Diensten herzustellen.</p>
+
+                <h3>5. Rechte der Betroffenen</h3>
+                <p>Sie haben das Recht:</p>
+                <ul>
+                    <li>gemäß Art. 15 DSGVO Auskunft über Ihre von uns verarbeiteten personenbezogenen Daten zu verlangen,</li>
+                    <li>gemäß Art. 16 DSGVO unverzüglich die Berichtigung unrichtiger oder Vervollständigung Ihrer bei uns gespeicherten personenbezogenen Daten zu verlangen,</li>
+                    <li>gemäß Art. 17 DSGVO die Löschung Ihrer bei uns gespeicherten personenbezogenen Daten zu verlangen,</li>
+                    <li>gemäß Art. 18 DSGVO die Einschränkung der Verarbeitung Ihrer personenbezogenen Daten zu verlangen,</li>
+                    <li>gemäß Art. 21 DSGVO Widerspruch gegen die Verarbeitung Ihrer Daten einzulegen.</li>
+                </ul>
+                <p>Bitte wenden Sie sich zur Ausübung Ihrer Rechte an: alk220002@spengergasse.at</p>
+
+                <h3>6. Änderungen dieser Datenschutzerklärung</h3>
+                <p>Wir behalten uns vor, diese Datenschutzerklärung anzupassen, um sie stets den aktuellen rechtlichen Anforderungen anzupassen oder Änderungen unserer Leistungen umzusetzen. Die jeweils aktuelle Datenschutzerklärung kann jederzeit auf unserer Website abgerufen werden.</p>
+                
+                
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <p>&copy; 2025 ResQ. Alle Rechte vorbehalten.</p>
+    </footer>
+</body>
+</html>

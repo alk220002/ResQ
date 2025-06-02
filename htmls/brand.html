@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Brand Erste Hilfe - ResQ</title>
+    <link rel="stylesheet" href="../css/styles.css" id="main-stylesheet">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .emergency-steps {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .step-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-card h2 {
+            color: #ff6f61;
+            margin-top: 0;
+        }
+
+        .step-card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .step-card li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .step-card li:before {
+            content: "✓";
+            color: #ff6f61;
+            position: absolute;
+            left: 0;
+        }
+
+        .emergency-notice {
+            background-color: #ffe5e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning {
+            color: #ff6f61;
+            font-weight: bold;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .resource-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-card h3 {
+            color: #ff6f61;
+            margin-top: 0;
+        }
+
+        .resource-card a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        .resource-card a:hover {
+            text-decoration: underline;
+        }
+
+        /* Updated Navbar Styles */
+        .navbar {
+            background-color: #ff6f61;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            gap: 10px;
+        }
+
+        .navbar__logo img {
+            height: 30px;
+            width: auto;
+        }
+
+        .navbar__menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar__menu li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar__menu li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer Styles */
+        footer {
+            background-color: #ff6f61;
+            color: white;
+            padding: 30px 20px;
+            margin-top: 40px;
+            box-shadow: 0 -4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin-right: 20px;
+        }
+
+        .footer-section h3 {
+            color: white;  /* Ändern von #ff6f61 zu white */
+            border-bottom: 2px solid #ff6f61;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-section a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            background-color: #ff6f61;  /* Ändern von #e65a50 oder #333 zu #ff6f61 */
+            text-align: center;
+            margin-top: 20px;
+            padding: 10px 0;
+        }
+
+        .social-links {
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar__logo">
+            <img src="../images/ResQ_Logo.png" alt="ResQ Logo">
+            ResQ
+        </a>
+        <ul class="navbar__menu">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="notfalldienste.html">Notfalldienste</a></li>
+            <li><a href="notfallskarte.html">Notfallskarte</a></li>
+            <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+            <li><a href="suchfunktion.html">Suchfunktion</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+        </ul>
+    </nav>
+
+    <main class="emergency-steps">
+        <div class="emergency-notice">
+            <h1>🔥 Erste Hilfe bei Bränden</h1>
+            <p class="warning">⚠️ NOTRUF 122 - Bei Brandgefahr sofort die Feuerwehr alarmieren!</p>
+        </div>
+
+        <div class="step-card">
+            <h2>1. Alarmieren</h2>
+            <ul>
+                <li>Feuerwehr unter 122 anrufen</li>
+                <li>Genauen Standort durchgeben</li>
+                <li>Art des Brandes beschreiben</li>
+                <li>Angeben, ob Personen in Gefahr sind</li>
+                <li>Namen und Rückrufnummer nennen</li>
+            </ul>
+        </div>
+
+        <div class="step-card">
+            <h2>2. Retten</h2>
+            <ul>
+                <li>Eigene Sicherheit beachten</li>
+                <li>Gefährdete Personen warnen</li>
+                <li>Menschen aus der Gefahrenzone bringen</li>
+                <li>Türen und Fenster schließen</li>
+                <li>Aufzüge nicht benutzen</li>
+            </ul>
+        </div>
+
+        <div class="step-card">
+            <h2>3. Löschen</h2>
+            <ul>
+                <li>Nur Entstehungsbrände selbst bekämpfen</li>
+                <li>Feuerlöscher richtig einsetzen</li>
+                <li>Windrichtung beachten</li>
+                <li>Von unten nach oben löschen</li>
+                <li>Rückzugweg freihalten</li>
+            </ul>
+        </div>
+
+        <div class="step-card">
+            <h2>Brandentstehung vorbeugen</h2>
+            <ul>
+                <li>Rauchmelder installieren und regelmäßig prüfen</li>
+                <li>Fluchtweg freihalten</li>
+                <li>Elektrische Geräte regelmäßig prüfen</li>
+                <li>Brennbare Materialien sicher lagern</li>
+                <li>Feuerlöscher bereithalten und warten</li>
+            </ul>
+        </div>
+
+        <div class="resources">
+            <div class="resource-card">
+                <h3>Wichtige Kontakte</h3>
+                <ul>
+                    <li>🚒 Feuerwehr: <strong>122</strong></li>
+                    <li>🚑 Rettung: <strong>144</strong></li>
+                    <li>👮 Polizei: <strong>133</strong></li>
+                    <li>🆘 Euro-Notruf: <strong>112</strong></li>
+                </ul>
+            </div>
+
+            <div class="resource-card">
+                <h3>Nützliche Links</h3>
+                <ul>
+                    <li><a href="https://berufsfeuerwehr-wien.at/" target="_blank">Berufsfeuerwehr Wien</a></li>
+                    <li><a href="https://www.roteskreuz.at/wien/ich-will-helfen/erste-hilfe-kurse-uebersicht" target="_blank">Erste Hilfe Portal Österreich</a></li>
+                    <li><a href="notfallskarte.html">ResQ Notfallkarte</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Notfall-Kontakte</h3>
+                <ul>
+                    <li>🚑 Rettung: 144</li>
+                    <li>👮 Polizei: 133</li>
+                    <li>🚒 Feuerwehr: 122</li>
+                    <li>🆘 Euro-Notruf: 112</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="notfalldienste.html">Notfalldienste</a></li>
+                    <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+                    <li><a href="notfallskarte.html">Notfallkarte</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Rechtliches</h3>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="impressum.html#datenschutz">Datenschutz</a></li>
+                    <li><a href="impressum.html#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ResQ. Alle Rechte vorbehalten.</p>
+            <div class="social-links">
+                <a href="#" title="Facebook">📱</a>
+                <a href="#" title="Twitter">📞</a>
+                <a href="#" title="Instagram">📧</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

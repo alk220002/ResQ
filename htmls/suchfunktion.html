@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suchfunktion - ResQ</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="../css/styles.css" id="main-stylesheet">
+    <script src="../js/mobile.js"></script>
+    <script defer src="app.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ff6f61;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+         .navbar__logo img {
+        height: 40px; /* Definierte Höhe für das Logo */
+        width: auto;  /* Breite wird proportional angepasst */
+        margin-right: 10px;
+    }
+        .navbar__menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar__menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .navbar__menu a:hover {
+            text-decoration: underline;
+        }
+
+        .large-search {
+            display: flex;
+            justify-content: center;
+            margin: 40px 0;
+            position: relative;
+        }
+
+        .large-input {
+            width: 60%;
+            padding: 15px;
+            font-size: 18px;
+            border: 1px solid #ccc;
+            border-radius: 25px;
+            outline: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .large-input:focus {
+            border-color: #007BFF;
+        }
+
+        .dropdown {
+            position: absolute;
+            top: 60px;
+            width: 60%;
+            background-color: #fff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            z-index: 1000;
+        }
+
+        .dropdown ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .dropdown li {
+            padding: 10px 15px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown li:hover {
+            background-color: #f0f0f0;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            margin-top: 20px;
+        }
+
+        @media (max-width: 768px) {
+            .large-input {
+                width: 80%;
+            }
+
+            .dropdown {
+                width: 80%;
+            }
+        }
+
+        .search-result {
+            padding: 10px;
+        }
+
+        .search-error {
+            color: #ff6f61;
+            padding: 10px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-around;
+            flex-wrap: wrap;
+            padding: 20px 0;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            margin-bottom: 10px;
+            font-size: 18px;
+            color: #fff;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .footer-section ul li {
+            margin: 5px 0;
+        }
+
+        .footer-section ul li a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+
+        .social-links {
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: #fff;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+
+        .social-links a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar__logo">
+    <img src="../images/ResQ_Logo.png" alt="ResQ Logo">
+    ResQ
+</a>
+        <ul class="navbar__menu">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="notfalldienste.html">Notfalldienste</a></li>
+            <li><a href="notfallskarte.html">Notfallskarte</a></li>
+            <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+            <li><a href="suchfunktion.html">Suchfunktion</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <h1 style="text-align: center; color: #ff6f61;">Suchfunktion</h1>
+        <section class="search large-search">
+            <input type="text" id="searchInput" placeholder="Geben Sie Ihren Suchbegriff ein..." class="large-input">
+            <div class="dropdown" id="dropdown" style="display: none;">
+                <ul id="dropdownList"></ul>
+            </div>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Notfall-Kontakte</h3>
+                <ul>
+                    <li>🚑 Rettung: 144</li>
+                    <li>👮 Polizei: 133</li>
+                    <li>🚒 Feuerwehr: 122</li>
+                    <li>🆘 Euro-Notruf: 112</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="notfalldienste.html">Notfalldienste</a></li>
+                    <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+                    <li><a href="notfallskarte.html">Notfallkarte</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Rechtliches</h3>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="impressum.html#datenschutz">Datenschutz</a></li>
+                    <li><a href="impressum.html#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ResQ. Alle Rechte vorbehalten.</p>
+            <div class="social-links">
+                <a href="#" title="Facebook">📱</a>
+                <a href="#" title="Twitter">📞</a>
+                <a href="#" title="Instagram">📧</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Ersetze den bestehenden data-Array mit diesem erweiterten Array
+const data = [
+    { name: "Start", link: "index.html", description: "Startseite von ResQ", keywords: "home hauptseite startseite" },
+    { name: "Notfalldienste", link: "notfalldienste.html", description: "Übersicht aller Notfalldienste", keywords: "notfall hilfe dienste" },
+    { name: "Erste Hilfe", link: "erstehilfe.html", description: "Erste Hilfe Anleitungen und Notfallmaßnahmen", keywords: "erste hilfe notfall anleitung verletzung" },
+    { name: "Notfallskarte", link: "notfallskarte.html", description: "Interaktive Karte mit Notfalleinrichtungen", keywords: "karte standort position" },
+    { name: "Brand", link: "brand.html", description: "Verhalten bei Bränden und Brandschutzmaßnahmen", keywords: "feuer brand notfall brandschutz feuerwehr" },
+    { name: "Reanimation", link: "reanimation.html", description: "Lebensrettende Sofortmaßnahmen und Wiederbelebung", keywords: "herz-lungen-wiederbelebung cpr erste hilfe herzstillstand" },
+    { name: "Panik", link: "panik.html", description: "Umgang mit Panikattacken und Angstzuständen", keywords: "angst panikattacke notfall psychisch" },
+    { name: "Ertrinken", link: "ertrinken.html", description: "Rettungsmaßnahmen bei Ertrinkungsunfällen", keywords: "wasser notfall rettung schwimmen" },
+    { name: "Krankenhäuser", link: "krankenhaeuser.html", description: "Liste aller Krankenhäuser in Wien", keywords: "krankenhaus spital notaufnahme" },
+    { name: "Polizeistationen", link: "polizeistationen.html", description: "Übersicht der Polizeistationen", keywords: "polizei notruf sicherheit" },
+    { name: "Feuerwehrstationen", link: "feuerwehrstationen.html", description: "Liste aller Feuerwehrstandorte", keywords: "feuerwehr brand notruf" },
+    { name: "Impressum", link: "impressum.html", description: "Rechtliche Informationen und Kontakt", keywords: "kontakt info legal impressum" }
+];
+
+        const searchInput = document.getElementById("searchInput");
+        const dropdown = document.getElementById("dropdown");
+        const dropdownList = document.getElementById("dropdownList");
+
+        // Ersetze die bestehende performSearch-Funktion mit dieser verbesserten Version
+function performSearch() {
+    const query = searchInput.value.toLowerCase().trim();
+    dropdownList.innerHTML = "";
+
+    if (query.length < 2) {
+        dropdown.style.display = "none";
+        return;
+    }
+
+    const results = data.filter(item => 
+        item.name.toLowerCase().includes(query) || 
+        item.description.toLowerCase().includes(query) ||
+        item.keywords.toLowerCase().includes(query)
+    );
+
+    dropdown.style.display = "block";
+
+    if (results.length > 0) {
+        results.forEach(item => {
+            const li = document.createElement("li");
+            li.innerHTML = `
+                <div class="search-result">
+                    <strong>${highlightMatch(item.name, query)}</strong><br>
+                    <small>${highlightMatch(item.description, query)}</small>
+                </div>
+            `;
+            li.addEventListener("click", () => {
+                window.location.href = item.link;
+            });
+            dropdownList.appendChild(li);
+        });
+    } else {
+        const li = document.createElement("li");
+        li.innerHTML = `
+            <div class="search-error">
+                <strong>Keine Ergebnisse gefunden</strong><br>
+                <small>Versuchen Sie es mit einem anderen Suchbegriff.<br>
+                Suchvorschläge: Notfall, Hilfe, Brand, Panik, Erste Hilfe</small>
+            </div>
+        `;
+        dropdownList.appendChild(li);
+    }
+}
+
+        function highlightMatch(text, query) {
+            const regex = new RegExp(`(${query})`, 'gi');
+            return text.replace(regex, '<mark>$1</mark>');
+        }
+
+        // Event-Listener für die Eingabe mit Debouncing
+        let timeout = null;
+        searchInput.addEventListener("input", () => {
+            clearTimeout(timeout);
+            timeout = setTimeout(performSearch, 300);
+        });
+
+        // Event-Listener für die Enter-Taste
+        searchInput.addEventListener("keypress", function(event) {
+            if (event.key === "Enter") {
+                performSearch();
+            }
+        });
+
+        // Dropdown ausblenden bei Klick außerhalb
+        document.addEventListener("click", function(event) {
+            if (!dropdown.contains(event.target) && event.target !== searchInput) {
+                dropdown.style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,678 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notfallskarte - ResQ</title>
+    <link rel="stylesheet" href="../css/styles.css" id="main-stylesheet">
+    <script src="../js/mobile.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ff6f61;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+         .navbar__logo img {
+        height: 40px; /* Definierte Höhe für das Logo */
+        width: auto;  /* Breite wird proportional angepasst */
+        margin-right: 10px;
+    }
+        .navbar__menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar__menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .navbar__menu a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .map-container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+        }
+
+        #map {
+            width: 70%;
+            height: 500px;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-container {
+            width: 25%;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            background: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .filter-container button {
+            padding: 15px;
+            font-size: 16px;
+            background: white;
+            color: #333;
+            border: 2px solid #ff6f61;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .filter-container button:hover {
+            background: #ff6f61;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(255, 111, 97, 0.2);
+        }
+
+        .filter-container button.active {
+            background: #ff6f61;
+            color: white;
+        }
+
+        .filter-container img {
+            width: 30px;
+            height: 30px;
+            transition: transform 0.3s ease;
+        }
+
+        .filter-container button:hover img {
+            transform: scale(1.1);
+        }
+
+        #filter-all {
+            background: #ff6f61;
+            color: white;
+            border: none;
+            margin-top: 10px;
+        }
+
+        #filter-all:hover {
+            background: #e65a50;
+        }
+
+        .search-container {
+            margin: 20px 0;
+            display: flex;
+            gap: 10px;
+        }
+
+        .search-container input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+
+        .search-container button {
+            padding: 10px 20px;
+            background-color: #ff6f61;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .marker-popup {
+            min-width: 200px;
+        }
+
+        .marker-popup h3 {
+            color: #ff6f61;
+            margin: 0 0 10px 0;
+        }
+
+        .marker-popup p {
+            margin: 5px 0;
+        }
+
+        .marker-popup a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        .marker-popup a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 10px;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            text-align: left;
+        }
+
+        .footer-section h3 {
+            margin-top: 0;
+            color: white;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin: 5px 0;
+        }
+
+        .footer-section ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .footer-section ul li a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding-top: 10px;
+            margin-top: 10px;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        /* Responsive Design */
+@media (max-width: 768px) {
+    .map-container {
+        flex-direction: column;
+    }
+    
+    .filter-container {
+        width: 100%;
+        flex-direction: row;
+        flex-wrap: wrap;
+    }
+    
+    .filter-container button {
+        flex: 1;
+        min-width: 200px;
+    }
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+       <a href="index.html" class="navbar__logo">
+    <img src="../images/ResQ_Logo.png" alt="ResQ Logo">
+    ResQ
+</a>
+        </a>
+        <ul class="navbar__menu">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="notfalldienste.html">Notfalldienste</a></li>
+            <li><a href="notfallskarte.html">Notfallslkarte</a></li>
+            <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+            <li><a href="suchfunktion.html">Suchfunktion</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+           
+        </ul>
+    </nav>
+    
+    <main>
+        <h1>Notfallskarte Wien</h1>
+        <div class="search-container">
+            <input type="text" id="address-search" placeholder="Adresse eingeben...">
+            <button onclick="searchLocation()">Suchen</button>
+        </div>
+        <div class="map-container">
+            <div id="map"></div>
+            <div class="filter-container">
+                <button id="filter-police">
+                    <img src="../images/Polizeistation.png"alt="Polizei">
+                    Zeige nur Polizei
+                </button>
+                <button id="filter-hospital">
+                    <img src="../images/Krankenhaus_Icon.png" alt="Krankenhaus">
+                    Zeige nur Krankenhäuser
+                </button>
+                <button id="filter-fire">
+                    <img src="../images/Feuerwehr_Icon.png" alt="Feuerwehr">
+                    Zeige nur Feuerwehr
+                </button>
+                <button id="filter-all">
+                    Zeige alle
+                </button>
+            </div>
+        </div>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Notfall-Kontakte</h3>
+                <ul>
+                    <li>🚑 Rettung: 144</li>
+                    <li>👮 Polizei: 133</li>
+                    <li>🚒 Feuerwehr: 122</li>
+                    <li>🆘 Euro-Notruf: 112</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="notfalldienste.html">Notfalldienste</a></li>
+                    <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+                    <li><a href="notfallskarte.html">Notfallkarte</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Rechtliches</h3>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="impressum.html#datenschutz">Datenschutz</a></li>
+                    <li><a href="impressum.html#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ResQ. Alle Rechte vorbehalten.</p>
+            <div class="social-links">
+                <a href="#" title="Facebook">📱</a>
+                <a href="#" title="Twitter">📞</a>
+                <a href="#" title="Instagram">📧</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Karte initialisieren
+        const map = L.map('map').setView([48.2082, 16.3738], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; OpenStreetMap contributors'
+        }).addTo(map);
+
+        // Geocoder für Adresssuche hinzufügen
+        const geocoder = L.Control.Geocoder.nominatim();
+
+        // Demo-Daten für Notfallstationen
+        const locations = [
+            // Polizeistationen
+            { 
+                type: 'police',
+                lat: 48.2082, 
+                lng: 16.3738, 
+                name: "Polizeiinspektion Innere Stadt",
+                address: "Schottenring 7-9, 1010 Wien",
+                phone: "133 (Notruf) / +43 1 31310-0",
+                hours: "24/7",
+                website: "https://www.polizei.gv.at"
+            },
+            {
+                type: 'police',
+                lat: 48.1982, 
+                lng: 16.3538, 
+                name: "Polizeiinspektion Mariahilf",
+                address: "Kopernikusgasse 1, 1060 Wien",
+                phone: "133 (Notruf) / +43 1 31310-0",
+                hours: "24/7",
+                website: "https://www.polizei.gv.at"
+            },
+            {
+                type: 'police',
+                lat: 48.1895, 
+                lng: 16.3731, 
+                name: "Polizeiinspektion Margareten",
+                address: "Wehrgasse 38, 1050 Wien",
+                phone: "133 (Notruf) / +43 1 31310-0",
+                hours: "24/7",
+                website: "https://www.polizei.gv.at"
+            },
+            {
+                type: 'police',
+                lat: 48.2461, 
+                lng: 16.3768, 
+                name: "Polizeiinspektion Floridsdorf",
+                address: "Am Spitz 1, 1210 Wien",
+                phone: "133 (Notruf) / +43 1 31310-0",
+                hours: "24/7",
+                website: "https://www.polizei.gv.at"
+            },
+
+            // Krankenhäuser
+            {
+                type: 'hospital',
+                lat: 48.2182, 
+                lng: 16.3938, 
+                name: "AKH Wien",
+                address: "Währinger Gürtel 18-20, 1090 Wien",
+                phone: "+43 1 40400-0",
+                hours: "24/7 Notaufnahme",
+                website: "https://www.akhwien.at"
+            },
+            {
+                type: 'hospital',
+                lat: 48.1882, 
+                lng: 16.3638, 
+                name: "Krankenhaus Rudolfstiftung",
+                address: "Juchgasse 25, 1030 Wien",
+                phone: "+43 1 71165-0",
+                hours: "24/7 Notaufnahme",
+                website: "https://www.wienkav.at/rudolfstiftung"
+            },
+            {
+                type: 'hospital',
+                lat: 48.1901, 
+                lng: 16.3377, 
+                name: "Krankenhaus Hietzing",
+                address: "Wolkersbergenstraße 1, 1130 Wien",
+                phone: "+43 1 80110-0",
+                hours: "24/7 Notaufnahme",
+                website: "https://www.wienkav.at/khr"
+            },
+            {
+                type: 'hospital',
+                lat: 48.2298, 
+                lng: 16.4023, 
+                name: "SMZ Ost - Donauspital",
+                address: "Langobardenstraße 122, 1220 Wien",
+                phone: "+43 1 28802-0",
+                hours: "24/7 Notaufnahme",
+                website: "https://www.wienkav.at/smz-ost"
+            },
+            {
+                type: 'hospital',
+                lat: 48.1851,
+                lng: 16.3594,
+                name: "Franziskus Spital Margareten",
+                address: "Nikolsdorfergasse 32, 1050 Wien",
+                phone: "+43 1 59988-0",
+                hours: "24/7 Notaufnahme",
+                website: "https://www.franziskusspital.at"
+            },
+
+            // Feuerwehrstationen
+            {
+                type: 'fire',
+                lat: 48.2282, 
+                lng: 16.3838, 
+                name: "Hauptfeuerwache Am Hof",
+                address: "Am Hof 9, 1010 Wien",
+                phone: "122 (Notruf) / +43 1 531 99-0",
+                hours: "24/7",
+                website: "https://www.wien.gv.at/kontakte/ma68"
+            },
+            {
+                type: 'fire',
+                lat: 48.1782, 
+                lng: 16.3438, 
+                name: "Feuerwache Donaustadt",
+                address: "Deutsch-Wagram-Straße 31, 1220 Wien",
+                phone: "122 (Notruf) / +43 1 531 99-0",
+                hours: "24/7",
+                website: "https://www.wien.gv.at/kontakte/ma68"
+            },
+            {
+                type: 'fire',
+                lat: 48.2461, 
+                lng: 16.4218, 
+                name: "Hauptfeuerwache Floridsdorf",
+                address: "Brünner Straße 129, 1210 Wien",
+                phone: "122 (Notruf) / +43 1 531 99-0",
+                hours: "24/7",
+                website: "https://www.wien.gv.at/kontakte/ma68"
+            },
+            {
+                type: 'fire',
+                lat: 48.1654, 
+                lng: 16.3817, 
+                name: "Hauptfeuerwache Favoriten",
+                address: "Arsenalstraße 1, 1100 Wien",
+                phone: "122 (Notruf) / +43 1 531 99-0",
+                hours: "24/7",
+                website: "https://www.wien.gv.at/kontakte/ma68"
+            }
+        ];
+
+        const markers = [];
+
+        // Popup-Template
+        function createPopupContent(location) {
+            // Kodiere die Adresse für die URL
+            const encodedAddress = encodeURIComponent(location.address);
+            
+            return `
+                <div class="marker-popup">
+                    <h3>${location.name}</h3>
+                    <p><strong>Adresse:</strong> ${location.address}</p>
+                    <p><strong>Telefon:</strong> ${location.phone}</p>
+                    <p><strong>Öffnungszeiten:</strong> ${location.hours}</p>
+                    <p>
+                        <a href="${location.website}" target="_blank">Website besuchen</a> |
+                        <a href="https://www.google.com/maps/search/?api=1&query=${encodedAddress}" target="_blank">
+                            Route planen
+                        </a>
+                    </p>
+                </div>
+            `;
+        }
+
+        // Marker hinzufügen
+        locations.forEach(location => {
+            const icon = L.icon({
+                iconUrl: location.type === 'police' ? '../images/Polizeistationen_marker_backgroundless.png' :
+                         location.type === 'hospital' ? '../images/Krankenhaus_marker_backgroundless.png' :
+                         '../images/Feuerwehrstationen_marker_backgroundless.png',
+                iconSize: [60, 60]
+            });
+
+            const marker = L.marker([location.lat, location.lng], { icon })
+                .bindPopup(createPopupContent(location))
+                .addTo(map);
+
+            markers.push({ marker, type: location.type });
+        });
+
+        // Adresssuche-Funktion
+        function searchLocation() {
+            const address = document.getElementById('address-search').value;
+            if (!address) return;
+
+            // Füge 'Wien' zur Suche hinzu, falls nicht vorhanden
+            const searchQuery = address.toLowerCase().includes('wien') ? address : `${address}, Wien, Österreich`;
+
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}`)
+                .then(response => response.json())
+                .then(data => {
+                    if (data && data.length > 0) {
+                        const location = data[0];
+                        const lat = parseFloat(location.lat);
+                        const lng = parseFloat(location.lon);
+
+                        // Setze Kartenansicht auf gefundene Position
+                        map.setView([lat, lng], 15);
+
+                        // Markiere die Suchadresse
+                        const searchMarker = L.marker([lat, lng], {
+                            icon: L.icon({
+                                iconUrl: '../images/Suchemarker_backgroundless.png', // Optional: Spezieller Marker für die Suche
+                                iconSize: [60, 60]
+                            })
+                        }).addTo(map);
+
+                        // Finde die nächstgelegenen Stationen
+                        const nearestLocations = findNearestLocations(lat, lng, 3);
+
+                        // Setze alle Marker auf halbtransparent
+                        markers.forEach(({ marker }) => {
+                            marker.setOpacity(0.3);
+                        });
+
+                        // Hebe die nächsten Stationen hervor
+                        nearestLocations.forEach(loc => {
+                            const marker = markers.find(m => 
+                                m.marker.getLatLng().lat === loc.lat && 
+                                m.marker.getLatLng().lng === loc.lng
+                            );
+                            if (marker) {
+                                marker.marker.setOpacity(1);
+                                marker.marker.openPopup();
+                            }
+                        });
+
+                        // Zeige Erfolgsmeldung
+                        alert(`Nächste ${nearestLocations.length} Notfallstationen wurden gefunden und markiert.`);
+                    } else {
+                        alert('Adresse konnte nicht gefunden werden. Bitte überprüfen Sie Ihre Eingabe.');
+                    }
+                })
+                .catch(error => {
+                    console.error('Fehler bei der Adresssuche:', error);
+                    alert('Es gab einen Fehler bei der Suche. Bitte versuchen Sie es erneut.');
+                });
+        }
+
+        // Event-Listener für die Eingabetaste
+        document.getElementById('address-search').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchLocation();
+            }
+        });
+
+        // Funktion zum Finden der nächstgelegenen Stationen
+        function findNearestLocations(lat, lng, limit = 3) {
+            return locations
+                .map(loc => ({
+                    ...loc,
+                    distance: getDistance(lat, lng, loc.lat, loc.lng)
+                }))
+                .sort((a, b) => a.distance - b.distance)
+                .slice(0, limit);
+        }
+
+        // Entfernungsberechnung (Haversine-Formel)
+        function getDistance(lat1, lon1, lat2, lon2) {
+            const R = 6371; // Erdradius in km
+            const dLat = deg2rad(lat2 - lat1);
+            const dLon = deg2rad(lon2 - lon1);
+            const a = 
+                Math.sin(dLat/2) * Math.sin(dLat/2) +
+                Math.cos(deg2rad(lat1)) * Math.cos(deg2rad(lat2)) * 
+                Math.sin(dLon/2) * Math.sin(dLon/2); 
+            const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+            return R * c;
+        }
+
+        function deg2rad(deg) {
+            return deg * (Math.PI/180);
+        }
+
+        // Filter-Funktionen
+        document.getElementById('filter-police').addEventListener('click', () => {
+            markers.forEach(({ marker, type }) => {
+                if (type === 'police') marker.addTo(map);
+                else map.removeLayer(marker);
+            });
+        });
+
+        document.getElementById('filter-hospital').addEventListener('click', () => {
+            markers.forEach(({ marker, type }) => {
+                if (type === 'hospital') marker.addTo(map);
+                else map.removeLayer(marker);
+            });
+        });
+
+        document.getElementById('filter-fire').addEventListener('click', () => {
+            markers.forEach(({ marker, type }) => {
+                if (type === 'fire') marker.addTo(map);
+                else map.removeLayer(marker);
+            });
+        });
+
+        document.getElementById('filter-all').addEventListener('click', () => {
+            markers.forEach(({ marker }) => marker.addTo(map));
+        });
+
+        // Aktive Filter-Markierung
+const filterButtons = document.querySelectorAll('.filter-container button');
+
+filterButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        // Entferne active-Klasse von allen Buttons
+        filterButtons.forEach(btn => btn.classList.remove('active'));
+        
+        // Füge active-Klasse zum geklickten Button hinzu
+        if (button.id !== 'filter-all') {
+            button.classList.add('active');
+        }
+    });
+});
+    </script>
+</body>
+</html>

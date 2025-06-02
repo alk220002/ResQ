@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Krankenhäuser - ResQ</title>
+    <link rel="stylesheet" href="../css/styles.css" id="main-stylesheet">
+    <script src="../js/mobile.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ff6f61;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar__logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .navbar__menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar__menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .navbar__menu a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #ff6f61;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .hospital-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .hospital-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .hospital-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .hospital-card h2 {
+            color: #ff6f61;
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .hospital-info {
+            margin-top: 15px;
+        }
+
+        .hospital-info p {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .emergency-tag {
+            background-color: #ff6f61;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: inline-block;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .contact-info a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .info-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h2 {
+            color: #ff6f61;
+            margin-bottom: 20px;
+        }
+
+        .faq-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateX(10px);
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #ff6f61;
+            margin-bottom: 10px;
+        }
+
+        .mission-statement {
+            padding: 20px;
+            background-color: #fff5f4;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            padding: 20px;
+            background-color: #ff6f61;
+            color: white;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            margin-top: 0;
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding: 10px;
+            background-color: #e55;
+        }
+
+        .social-links {
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar__logo">
+            <img src="../images/ResQ_Logo.png" alt="ResQ Logo">
+            ResQ
+        </a>
+        <ul class="navbar__menu">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="notfalldienste.html">Notfalldienste</a></li>
+            <li><a href="notfallskarte.html">Notfallskarte</a></li>
+            <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+            <li><a href="suchfunktion.html">Suchfunktion</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <h1>Krankenhäuser in Wien</h1>
+        <div class="hospital-list">
+            <!-- AKH Wien -->
+            <div class="hospital-card">
+                <h2>AKH Wien</h2>
+                <div class="hospital-info">
+                    <p><strong>Adresse:</strong> Währinger Gürtel 18-20, 1090 Wien</p>
+                    <p><strong>Telefon:</strong> +43 1 40400-0</p>
+                    <p><strong>Öffnungszeiten:</strong> 24/7</p>
+                    <div class="emergency-tag">Notaufnahme verfügbar</div>
+                    <div class="contact-info">
+                        <p><a href="https://www.akhwien.at/" target="_blank">Website besuchen</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Wilhelminenspital -->
+            <div class="hospital-card">
+                <h2>Wilhelminenspital</h2>
+                <div class="hospital-info">
+                    <p><strong>Adresse:</strong> Montleartstraße 37, 1160 Wien</p>
+                    <p><strong>Telefon:</strong> +43 1 49150-0</p>
+                    <p><strong>Öffnungszeiten:</strong> 24/7</p>
+                    <div class="emergency-tag">Notaufnahme verfügbar</div>
+                    <div class="contact-info">
+                        <p><a href="https://www.wienkav.at/wilhelminenspital" target="_blank">Website besuchen</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SMZ Ost -->
+            <div class="hospital-card">
+                <h2>SMZ Ost - Donauspital</h2>
+                <div class="hospital-info">
+                    <p><strong>Adresse:</strong> Langobardenstraße 122, 1220 Wien</p>
+                    <p><strong>Telefon:</strong> +43 1 28802-0</p>
+                    <p><strong>Öffnungszeiten:</strong> 24/7</p>
+                    <div class="emergency-tag">Notaufnahme verfügbar</div>
+                    <div class="contact-info">
+                        <p><a href="https://www.wienkav.at/smz-ost" target="_blank">Website besuchen</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Rudolfstiftung -->
+            <div class="hospital-card">
+                <h2>Krankenhaus Rudolfstiftung</h2>
+                <div class="hospital-info">
+                    <p><strong>Adresse:</strong> Juchgasse 25, 1030 Wien</p>
+                    <p><strong>Telefon:</strong> +43 1 71165-0</p>
+                    <p><strong>Öffnungszeiten:</strong> 24/7</p>
+                    <div class="emergency-tag">Notaufnahme verfügbar</div>
+                    <div class="contact-info">
+                        <p><a href="https://www.wienkav.at/rudolfstiftung" target="_blank">Website besuchen</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="info-section">
+            <div class="mission-statement">
+                <h2>Was ist die Aufgabe eines Krankenhauses?</h2>
+                <p>Ein Krankenhaus ist eine stationäre Einrichtung, die folgende Hauptaufgaben erfüllt:</p>
+                <ul>
+                    <li>Diagnose, Behandlung und Pflege von Patienten</li>
+                    <li>Notfallversorgung rund um die Uhr</li>
+                    <li>Durchführung von operativen Eingriffen</li>
+                    <li>Prävention und Rehabilitation</li>
+                    <li>Aus- und Weiterbildung von medizinischem Personal</li>
+                </ul>
+            </div>
+
+            <h2>Häufig gestellte Fragen (FAQ)</h2>
+            <ul class="faq-list">
+                <li class="faq-item">
+                    <div class="faq-question">Wann sollte ich die Notaufnahme aufsuchen?</div>
+                    <div class="faq-answer">
+                        Die Notaufnahme sollte bei akuten, schwerwiegenden Beschwerden aufgesucht werden, wie:
+                        <ul>
+                            <li>Starke Schmerzen</li>
+                            <li>Unfälle mit Verletzungen</li>
+                            <li>Atemnot</li>
+                            <li>Bewusstlosigkeit</li>
+                            <li>Vergiftungen</li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="faq-item">
+                    <div class="faq-question">Was muss ich bei einem Krankenhausbesuch mitbringen?</div>
+                    <div class="faq-answer">
+                        <ul>
+                            <li>E-Card oder Versicherungskarte</li>
+                            <li>Amtlichen Lichtbildausweis</li>
+                            <li>Eventuell Überweisungsschein</li>
+                            <li>Aktuelle Medikamentenliste</li>
+                            <li>Allergiepass (falls vorhanden)</li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="faq-item">
+                    <div class="faq-question">Wie sind die Besuchszeiten?</div>
+                    <div class="faq-answer">
+                        Die Besuchszeiten variieren je nach Krankenhaus und Station. Generell gelten:
+                        <ul>
+                            <li>Allgemeine Stationen: meist täglich 14:00-19:00 Uhr</li>
+                            <li>Intensivstationen: eingeschränkte Besuchszeiten</li>
+                            <li>Kinderabteilungen: oft ganztägig für Eltern</li>
+                        </ul>
+                        Bitte informieren Sie sich vorab beim jeweiligen Krankenhaus.
+                    </div>
+                </li>
+
+                <li class="faq-item">
+                    <div class="faq-question">Was kostet ein Krankenhausaufenthalt?</div>
+                    <div class="faq-answer">
+                        Für Versicherte in Österreich:
+                        <ul>
+                            <li>Die Grundversorgung ist durch die Krankenversicherung abgedeckt</li>
+                            <li>Ein geringer Selbstbehalt kann anfallen</li>
+                            <li>Sonderklasse-Leistungen müssen extra bezahlt werden</li>
+                            <li>Bei Notfällen entstehen keine zusätzlichen Kosten</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Notfall-Kontakte</h3>
+                <ul>
+                    <li>🚑 Rettung: 144</li>
+                    <li>👮 Polizei: 133</li>
+                    <li>🚒 Feuerwehr: 122</li>
+                    <li>🆘 Euro-Notruf: 112</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="notfalldienste.html">Notfalldienste</a></li>
+                    <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+                    <li><a href="notfallskarte.html">Notfallkarte</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Rechtliches</h3>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="impressum.html#datenschutz">Datenschutz</a></li>
+                    <li><a href="impressum.html#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ResQ. Alle Rechte vorbehalten.</p>
+            <div class="social-links">
+                <a href="#" title="Facebook">📱</a>
+                <a href="#" title="Twitter">📞</a>
+                <a href="#" title="Instagram">📧</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

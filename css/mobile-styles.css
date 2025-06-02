@@ -9,6 +9,17 @@ body {
 .navbar {
     flex-direction: column;
     align-items: flex-start;
+    padding: 10px;
+}
+
+.navbar__logo {
+    margin-bottom: 10px;
+}
+
+.navbar__logo img {
+    height: 30px; /* Kleinere Größe für das Logo */
+    width: auto;
+    margin-right: 10px;
 }
 
 .navbar__menu {
@@ -17,6 +28,17 @@ body {
     width: 100%;
 }
 
+.navbar__menu li {
+    width: 100%;
+    text-align: left;
+}
+
+.navbar__menu a {
+    display: block;
+    padding: 8px 0;
+}
+
+/* Weitere mobile Anpassungen */
 .search-bar input {
     width: 90%;
 }
@@ -26,7 +48,7 @@ body {
 }
 
 .hero h1 {
-    font-size: 28px;
+    font-size: 24px;
 }
 
 .hero p {

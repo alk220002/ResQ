@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feuerwehrstationen - ResQ</title>
+    <link rel="stylesheet" href="../css/styles.css" id="main-stylesheet">
+    <script src="../js/mobile.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        .navbar {
+            background-color: #ff6f61;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .navbar__logo img {
+            height: 40px;
+            width: auto;
+            margin-right: 10px;
+        }
+
+        .navbar__menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar__menu a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        .navbar__menu a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            color: #ff6f61;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .fire-station-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .station-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .station-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .station-card h2 {
+            color: #ff6f61;
+            margin-top: 0;
+            font-size: 20px;
+        }
+
+        .station-info {
+            margin-top: 15px;
+        }
+
+        .station-info p {
+            margin: 5px 0;
+            line-height: 1.6;
+        }
+
+        .emergency-tag {
+            background-color: #ff6f61;
+            color: white;
+            padding: 5px 10px;
+            border-radius: 15px;
+            display: inline-block;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+
+        .contact-info {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+
+        .contact-info a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        .info-section {
+            margin-top: 40px;
+            padding: 20px;
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .info-section h2 {
+            color: #ff6f61;
+            margin-bottom: 20px;
+        }
+
+        .mission-statement {
+            padding: 20px;
+            background-color: #fff5f4;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .faq-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .faq-item {
+            margin-bottom: 20px;
+            padding: 15px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            transition: transform 0.3s ease;
+        }
+
+        .faq-item:hover {
+            transform: translateX(10px);
+        }
+
+        .faq-question {
+            font-weight: bold;
+            color: #ff6f61;
+            margin-bottom: 10px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        .footer-section ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin: 5px 0;
+        }
+
+        .footer-section a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        .footer-section a:hover {
+            text-decoration: underline;
+        }
+
+        .footer-bottom {
+            margin-top: 20px;
+            padding: 10px 0;
+            border-top: 1px solid #eee;
+        }
+
+        .social-links {
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            text-decoration: none;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar__logo">
+            <img src="../images/ResQ_Logo.png" alt="ResQ Logo">
+            ResQ
+        </a>
+        <ul class="navbar__menu">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="notfalldienste.html">Notfalldienste</a></li>
+            <li><a href="notfallskarte.html">Notfallskarte</a></li>
+            <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+            <li><a href="suchfunktion.html">Suchfunktion</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+        </ul>
+    </nav>
+    
+    <main>
+        <h1>Feuerwehrstationen in Wien</h1>
+        <div class="fire-station-list">
+            <!-- Hauptfeuerwache Zentrale -->
+            <div class="station-card">
+                <h2>Hauptfeuerwache Am Hof</h2>
+                <div class="station-info">
+                    <p><strong>Adresse:</strong> Am Hof 9, 1010 Wien</p>
+                    <p><strong>Notruf:</strong> 122</p>
+                    <p><strong>Telefon:</strong> +43 1 531 99-0</p>
+                    <p><strong>Öffnungszeiten:</strong> 24/7</p>
+                    <div class="emergency-tag">Notruf 122</div>
+                    <div class="contact-info">
+                        <p><a href="https://www.wien.gv.at/kontakte/ma68/" target="_blank">Website besuchen</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feuerwache Donaustadt -->
+            <div class="station-card">
+                <h2>Feuerwache Donaustadt</h2>
+                <div class="station-info">
+                    <p><strong>Adresse:</strong> Deutsch-Wagram-Straße 31, 1220 Wien</p>
+                    <p><strong>Notruf:</strong> 122</p>
+                    <p><strong>Telefon:</strong> +43 1 531 99-0</p>
+                    <p><strong>Öffnungszeiten:</strong> 24/7</p>
+                    <div class="emergency-tag">Notruf 122</div>
+                    <div class="contact-info">
+                        <p><a href="https://www.wien.gv.at/kontakte/ma68/" target="_blank">Website besuchen</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Feuerwache Floridsdorf -->
+            <div class="station-card">
+                <h2>Feuerwache Floridsdorf</h2>
+                <div class="station-info">
+                    <p><strong>Adresse:</strong> Brünner Straße 129, 1210 Wien</p>
+                    <p><strong>Notruf:</strong> 122</p>
+                    <p><strong>Telefon:</strong> +43 1 531 99-0</p>
+                    <p><strong>Öffnungszeiten:</strong> 24/7</p>
+                    <div class="emergency-tag">Notruf 122</div>
+                    <div class="contact-info">
+                        <p><a href="https://www.wien.gv.at/kontakte/ma68/" target="_blank">Website besuchen</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="info-section">
+            <div class="mission-statement">
+                <h2>Was sind die Aufgaben der Feuerwehr?</h2>
+                <p>Die Berufsfeuerwehr Wien ist für folgende Hauptaufgaben zuständig:</p>
+                <ul>
+                    <li>Brandbekämpfung und Brandschutz</li>
+                    <li>Technische Hilfeleistung bei Unfällen</li>
+                    <li>Katastrophenhilfe und Rettungsdienst</li>
+                    <li>Gefahrengutunfälle</li>
+                    <li>Vorbeugender Brandschutz</li>
+                </ul>
+            </div>
+
+            <h2>Häufig gestellte Fragen (FAQ)</h2>
+            <ul class="faq-list">
+                <li class="faq-item">
+                    <div class="faq-question">Wann sollte ich die Feuerwehr rufen?</div>
+                    <div class="faq-answer">
+                        Die Feuerwehr (Notruf 122) sollte in folgenden Situationen gerufen werden:
+                        <ul>
+                            <li>Bei Bränden jeder Art</li>
+                            <li>Bei Unfällen mit eingeklemmten Personen</li>
+                            <li>Bei Gasgeruch oder Gaslecks</li>
+                            <li>Bei Gefahrengutunfällen</li>
+                            <li>Bei Wasserschäden größeren Ausmaßes</li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="faq-item">
+                    <div class="faq-question">Welche Informationen braucht die Feuerwehr im Notfall?</div>
+                    <div class="faq-answer">
+                        Beim Notruf sollten Sie folgende Informationen bereithalten:
+                        <ul>
+                            <li>WO ist der Notfall? (genaue Adresse)</li>
+                            <li>WAS ist passiert?</li>
+                            <li>WIE VIELE Personen sind betroffen?</li>
+                            <li>WELCHE Art von Gefahr besteht?</li>
+                            <li>WARTEN auf Rückfragen</li>
+                        </ul>
+                    </div>
+                </li>
+
+                <li class="faq-item">
+                    <div class="faq-question">Was kostet ein Feuerwehreinsatz?</div>
+                    <div class="faq-answer">
+                        Informationen zu Einsatzkosten:
+                        <ul>
+                            <li>Echte Notfälle sind grundsätzlich kostenfrei</li>
+                            <li>Fehlalarme können kostenpflichtig sein</li>
+                            <li>Technische Einsätze können kostenpflichtig sein</li>
+                            <li>Versicherungen übernehmen oft die Kosten</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </section>
+    </main>
+    
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Notfall-Kontakte</h3>
+                <ul>
+                    <li>🚑 Rettung: 144</li>
+                    <li>👮 Polizei: 133</li>
+                    <li>🚒 Feuerwehr: 122</li>
+                    <li>🆘 Euro-Notruf: 112</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="notfalldienste.html">Notfalldienste</a></li>
+                    <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+                    <li><a href="notfallskarte.html">Notfallkarte</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Rechtliches</h3>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="impressum.html#datenschutz">Datenschutz</a></li>
+                    <li><a href="impressum.html#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ResQ. Alle Rechte vorbehalten.</p>
+            <div class="social-links">
+                <a href="#" title="Facebook">📱</a>
+                <a href="#" title="Twitter">📞</a>
+                <a href="#" title="Instagram">📧</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

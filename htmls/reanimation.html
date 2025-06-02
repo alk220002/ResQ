@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reanimation Erste Hilfe - ResQ</title>
+    <link rel="stylesheet" href="../css/styles.css" id="main-stylesheet">
+    <style>
+        /* Basis-Styling */
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+
+        /* Updated Navbar Styles - gleich wie in brand.html */
+        .navbar {
+            background-color: #ff6f61;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .navbar__logo {
+            display: flex;
+            align-items: center;
+            text-decoration: none;
+            color: white;
+            font-size: 20px;
+            gap: 10px;
+        }
+
+        .navbar__logo img {
+            height: 30px;
+            width: auto;
+        }
+
+        .navbar__menu {
+            list-style: none;
+            display: flex;
+            gap: 20px;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar__menu li a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+        }
+
+        .navbar__menu li a:hover {
+            text-decoration: underline;
+        }
+
+        /* Content Styling - gleich wie in brand.html */
+        .emergency-steps {
+            max-width: 1200px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+
+        .step-card {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            transition: transform 0.3s ease;
+        }
+
+        .step-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .step-card h2 {
+            color: #ff6f61;
+            margin-top: 0;
+        }
+
+        .step-card ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .step-card li {
+            margin-bottom: 10px;
+            padding-left: 25px;
+            position: relative;
+        }
+
+        .step-card li:before {
+            content: "✓";
+            color: #ff6f61;
+            position: absolute;
+            left: 0;
+        }
+
+        .emergency-notice {
+            background-color: #ffe5e0;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+
+        .warning {
+            color: #ff6f61;
+            font-weight: bold;
+        }
+
+        .resources {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+
+        .resource-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-card h3 {
+            color: #ff6f61;
+            margin-top: 0;
+        }
+
+        .resource-card a {
+            color: #ff6f61;
+            text-decoration: none;
+        }
+
+        .resource-card a:hover {
+            text-decoration: underline;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #ff6f61;
+            color: white;
+            margin-top: 20px;
+        }
+
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px 0;
+        }
+
+        .footer-section {
+            flex: 1;
+            min-width: 200px;
+            margin: 10px;
+        }
+
+        .footer-section h3 {
+            color: white;
+            margin-bottom: 10px;
+        }
+
+        .footer-section ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .footer-section ul li {
+            margin-bottom: 8px;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 10px 0;
+            margin-top: 10px;
+        }
+
+        .social-links {
+            margin-top: 10px;
+        }
+
+        .social-links a {
+            color: white;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="navbar__logo">
+            <img src="../images/ResQ_Logo.png" alt="ResQ Logo">
+            ResQ
+        </a>
+        <ul class="navbar__menu">
+            <li><a href="index.html">Start</a></li>
+            <li><a href="notfalldienste.html">Notfalldienste</a></li>
+            <li><a href="notfallskarte.html">Notfallkarte</a></li>
+            <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+            <li><a href="suchfunktion.html">Suchfunktion</a></li>
+            <li><a href="impressum.html">Impressum</a></li>
+        </ul>
+    </nav>
+
+    <main class="emergency-steps">
+        <div class="emergency-notice">
+            <h1>💗 Erste Hilfe bei Reanimation</h1>
+            <p class="warning">⚠️ NOTRUF 144 - Bei Bewusstlosigkeit sofort den Rettungsdienst alarmieren!</p>
+        </div>
+
+        <div class="step-card">
+            <h2>1. Prüfen</h2>
+            <ul>
+                <li>Bewusstsein kontrollieren durch Ansprechen und Anfassen</li>
+                <li>Atmung prüfen: Sehen, Hören, Fühlen für max. 10 Sekunden</li>
+                <li>Bei fehlender oder nicht normaler Atmung: Notruf wählen</li>
+                <li>Hilfe holen und nach einem Defibrillator (AED) suchen lassen</li>
+            </ul>
+        </div>
+
+        <div class="step-card">
+            <h2>2. Rufen</h2>
+            <ul>
+                <li>Notruf 144 wählen</li>
+                <li>Standort und Situation beschreiben</li>
+                <li>Anweisungen der Leitstelle befolgen</li>
+                <li>Telefon auf Lautsprecher stellen für weitere Anweisungen</li>
+            </ul>
+        </div>
+
+        <div class="step-card">
+            <h2>3. Drücken</h2>
+            <ul>
+                <li>30 Mal Herzdruckmassage durchführen</li>
+                <li>Druckpunkt: Mitte des Brustkorbs</li>
+                <li>Frequenz: 100-120 Mal pro Minute</li>
+                <li>Drucktiefe: 5-6 cm</li>
+                <li>Nach jeder Kompression Brustkorb vollständig entlasten</li>
+            </ul>
+        </div>
+
+        <div class="step-card">
+            <h2>4. Beatmen</h2>
+            <ul>
+                <li>2 Beatmungen nach 30 Kompressionen</li>
+                <li>Kopf überstrecken, Nase zuhalten</li>
+                <li>Mund-zu-Mund oder Mund-zu-Nase Beatmung</li>
+                <li>Beatmungsdauer: ca. 1 Sekunde pro Beatmung</li>
+                <li>Bei fehlendem Beatmungsschutz: nur Herzdruckmassage</li>
+            </ul>
+        </div>
+
+        <div class="resources">
+            <div class="resource-card">
+                <h3>Wichtige Kontakte</h3>
+                <ul>
+                    <li>🚑 Rettung: <strong>144</strong></li>
+                    <li>👮 Polizei: <strong>133</strong></li>
+                    <li>🚒 Feuerwehr: <strong>122</strong></li>
+                    <li>🆘 Euro-Notruf: <strong>112</strong></li>
+                </ul>
+            </div>
+
+            <div class="resource-card">
+                <h3>Nützliche Links</h3>
+                <ul>
+                    <li><a href="https://www.roteskreuz.at/wien/kurse/erste-hilfe" target="_blank">Rotes Kreuz Wien</a></li>
+                    <li><a href="https://www.aerztekammer.at/erste-hilfe" target="_blank">Ärztekammer Wien</a></li>
+                    <li><a href="notfallskarte.html">ResQ Notfallkarte</a></li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Notfall-Kontakte</h3>
+                <ul>
+                    <li>🚑 Rettung: 144</li>
+                    <li>👮 Polizei: 133</li>
+                    <li>🚒 Feuerwehr: 122</li>
+                    <li>🆘 Euro-Notruf: 112</li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul>
+                    <li><a href="index.html">Start</a></li>
+                    <li><a href="notfalldienste.html">Notfalldienste</a></li>
+                    <li><a href="erstehilfe.html">Erste Hilfe</a></li>
+                    <li><a href="notfallskarte.html">Notfallkarte</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Rechtliches</h3>
+                <ul>
+                    <li><a href="impressum.html">Impressum</a></li>
+                    <li><a href="impressum.html#datenschutz">Datenschutz</a></li>
+                    <li><a href="impressum.html#kontakt">Kontakt</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; 2025 ResQ. Alle Rechte vorbehalten.</p>
+            <div class="social-links">
+                <a href="#" title="Facebook">📱</a>
+                <a href="#" title="Twitter">📞</a>
+                <a href="#" title="Instagram">📧</a>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
