@@ -286,6 +286,9 @@
             <input type="text" id="address-search" placeholder="Adresse eingeben...">
             <button onclick="searchLocation()">Suchen</button>
         </div>
+        <div class="search-hint">
+            ⚠️ Hinweis: Bitte nach der Suche herauszoomen, um alle umliegenden Notfallstationen zu sehen!
+        </div>
         <div class="map-container">
             <div id="map"></div>
             <div class="filter-container">
@@ -542,7 +545,14 @@
         // Adresssuche-Funktion
         function searchLocation() {
             const address = document.getElementById('address-search').value;
-            if (!address) return;
+            const hint = document.getElementById('search-hint');
+            if (!address) {
+                hint.style.display = 'block';
+                hint.innerText = 'Bitte geben Sie eine Adresse ein.';
+                return;
+            } else {
+                hint.style.display = 'none';
+            }
 
             // Füge 'Wien' zur Suche hinzu, falls nicht vorhanden
             const searchQuery = address.toLowerCase().includes('wien') ? address : `${address}, Wien, Österreich`;
