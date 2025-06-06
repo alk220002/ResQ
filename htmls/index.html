@@ -397,19 +397,38 @@
 
     <script>
         const data = [
-            { name: "Start", link: "index.html", description: "Startseite von ResQ", keywords: "home hauptseite startseite" },
-            { name: "Notfalldienste", link: "notfalldienste.html", description: "Übersicht aller Notfalldienste", keywords: "notfall hilfe dienste" },
-            { name: "Erste Hilfe", link: "erstehilfe.html", description: "Erste Hilfe Anleitungen und Notfallmaßnahmen", keywords: "erste hilfe notfall anleitung verletzung" },
-            { name: "Notfallskarte", link: "notfallskarte.html", description: "Interaktive Karte mit Notfalleinrichtungen", keywords: "karte standort position" },
-            { name: "Brand", link: "brand.html", description: "Verhalten bei Bränden und Brandschutzmaßnahmen", keywords: "feuer brand notfall brandschutz feuerwehr" },
-            { name: "Reanimation", link: "reanimation.html", description: "Lebensrettende Sofortmaßnahmen und Wiederbelebung", keywords: "herz-lungen-wiederbelebung cpr erste hilfe herzstillstand" },
-            { name: "Panik", link: "panik.html", description: "Umgang mit Panikattacken und Angstzuständen", keywords: "angst panikattacke notfall psychisch" },
-            { name: "Ertrinken", link: "ertrinken.html", description: "Rettungsmaßnahmen bei Ertrinkungsunfällen", keywords: "wasser notfall rettung schwimmen" },
-            { name: "Krankenhäuser", link: "krankenhaeuser.html", description: "Liste aller Krankenhäuser in Wien", keywords: "krankenhaus spital notaufnahme" },
-            { name: "Polizeistationen", link: "polizeistationen.html", description: "Übersicht der Polizeistationen", keywords: "polizei notruf sicherheit" },
-            { name: "Feuerwehrstationen", link: "feuerwehrstationen.html", description: "Liste aller Feuerwehrstandorte", keywords: "feuerwehr brand notruf" },
-            { name: "Impressum", link: "impressum.html", description: "Rechtliche Informationen und Kontakt", keywords: "kontakt info legal impressum" }
-        ];
+    // Bestehende Einträge
+    { name: "Start", link: "index.html", description: "Startseite von ResQ", keywords: "home hauptseite startseite" },
+    { name: "Notfalldienste", link: "notfalldienste.html", description: "Übersicht aller Notfalldienste", keywords: "notfall hilfe dienste" },
+    { name: "Erste Hilfe", link: "erstehilfe.html", description: "Erste Hilfe Anleitungen", keywords: "erste hilfe notfall anleitung verletzung" },
+    { name: "Notfallkarte", link: "notfallskarte.html", description: "Interaktive Karte", keywords: "karte standort position" },
+    { name: "Impressum", link: "impressum.html", description: "Rechtliche Informationen", keywords: "impressum rechtliches kontakt" },
+    // Krankenhäuser
+    { name: "AKH Wien", link: "krankenhaeuser.html", description: "Währinger Gürtel 18-20, 1090 Wien", keywords: "krankenhaus akh spital notaufnahme 24/7 medizin unfall" },
+    { name: "Wilhelminenspital", link: "krankenhaeuser.html", description: "Montleartstraße 37, 1160 Wien", keywords: "krankenhaus spital notaufnahme 24/7 medizin unfall" },
+    { name: "SMZ Ost - Donauspital", link: "krankenhaeuser.html", description: "Langobardenstraße 122, 1220 Wien", keywords: "krankenhaus smz donauspital spital notaufnahme 24/7 medizin unfall" },
+    { name: "Krankenhaus Rudolfstiftung", link: "krankenhaeuser.html", description: "Juchgasse 25, 1030 Wien", keywords: "krankenhaus spital rudolfstiftung notaufnahme 24/7 medizin unfall" },
+
+    // Polizeistationen
+    { name: "Polizeiinspektion Innere Stadt", link: "polizeistationen.html", description: "Schottenring 7-9, 1010 Wien", keywords: "polizei notruf sicherheit 133 zentrum" },
+    { name: "Polizeiinspektion Mariahilf", link: "polizeistationen.html", description: "Kopernikusgasse 1, 1060 Wien", keywords: "polizei notruf sicherheit 133 mariahilf" },
+    { name: "Polizeiinspektion Donaustadt", link: "polizeistationen.html", description: "Wagramer Straße 89, 1220 Wien", keywords: "polizei notruf sicherheit 133 donaustadt" },
+
+    // Feuerwehrstationen
+    { name: "Hauptfeuerwache Am Hof", link: "feuerwehrstationen.html", description: "Am Hof 9, 1010 Wien", keywords: "feuerwehr brand notruf 122 zentrum hauptfeuerwache" },
+    { name: "Feuerwache Donaustadt", link: "feuerwehrstationen.html", description: "Deutsch-Wagram-Straße 31, 1220 Wien", keywords: "feuerwehr brand notruf 122 donaustadt" },
+    { name: "Feuerwache Floridsdorf", link: "feuerwehrstationen.html", description: "Brünner Straße 129, 1210 Wien", keywords: "feuerwehr brand notruf 122 floridsdorf" },
+    { name: "Hauptfeuerwache Favoriten", link: "feuerwehrstationen.html", description: "Sonnwendgasse 14, 1100 Wien", keywords: "feuerwehr brand notruf 122 favoriten" },
+
+    // Notfallsituationen
+    { name: "Brand", link: "erstehilfe.html#brand", description: "Was tun bei einem Brand?", keywords: "feuer brand notfall flammen rauch feuerwehr notruf 122 brandbekämpfung hausbrand" },
+    
+    { name: "Reanimation", link: "erstehilfe.html#reanimation", description: "Wiederbelebung und Herzdruckmassage", keywords: "reanimation wiederbelebung herz-lungen-wiederbelebung hlw cpr erste hilfe notfall herzstillstand bewusstlos rettung 144" },
+    
+    { name: "Panik", link: "erstehilfe.html#panik", description: "Hilfe bei Panikattacken", keywords: "panik angst panikattacke notfall beruhigen atmung stress psychisch" },
+    
+    { name: "Ertrinken", link: "erstehilfe.html#ertrinken", description: "Maßnahmen bei Ertrinkungsunfällen", keywords: "ertrinken wasser notfall schwimmen rettung erste hilfe wassernot 144 wiederbelebung" }
+];
 
         const searchInput = document.getElementById("searchInput");
         const dropdown = document.getElementById("dropdown");
