@@ -243,6 +243,17 @@
             font-size: 18px;
         }
 
+        .search-hint {
+            background-color: #fff3f3;
+            color: #ff0000;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 1px solid #ff6f61;
+            text-align: center;
+            font-weight: bold;
+        }
+
         /* Responsive Design */
 @media (max-width: 768px) {
     .map-container {
@@ -286,7 +297,7 @@
             <input type="text" id="address-search" placeholder="Adresse eingeben...">
             <button onclick="searchLocation()">Suchen</button>
         </div>
-        <div class="search-hint">
+        <div id="search-hint" class="search-hint" style="display: none;">
             ⚠️ Hinweis: Bitte nach der Suche herauszoomen, um alle umliegenden Notfallstationen zu sehen!
         </div>
         <div class="map-container">
@@ -366,149 +377,150 @@
 
         // Demo-Daten für Notfallstationen
         const locations = [
-            // Polizeistationen
-            { 
-                type: 'police',
-                lat: 48.2082, 
-                lng: 16.3738, 
-                name: "Polizeiinspektion Innere Stadt",
-                address: "Schottenring 7-9, 1010 Wien",
-                phone: "133 (Notruf) / +43 1 31310-0",
-                hours: "24/7",
-                website: "https://www.polizei.gv.at"
-            },
-            {
-                type: 'police',
-                lat: 48.1982, 
-                lng: 16.3538, 
-                name: "Polizeiinspektion Mariahilf",
-                address: "Kopernikusgasse 1, 1060 Wien",
-                phone: "133 (Notruf) / +43 1 31310-0",
-                hours: "24/7",
-                website: "https://www.polizei.gv.at"
-            },
-            {
-                type: 'police',
-                lat: 48.1895, 
-                lng: 16.3731, 
-                name: "Polizeiinspektion Margareten",
-                address: "Wehrgasse 38, 1050 Wien",
-                phone: "133 (Notruf) / +43 1 31310-0",
-                hours: "24/7",
-                website: "https://www.polizei.gv.at"
-            },
-            {
-                type: 'police',
-                lat: 48.2461, 
-                lng: 16.3768, 
-                name: "Polizeiinspektion Floridsdorf",
-                address: "Am Spitz 1, 1210 Wien",
-                phone: "133 (Notruf) / +43 1 31310-0",
-                hours: "24/7",
-                website: "https://www.polizei.gv.at"
-            },
+    // Polizeistationen
+    { 
+        type: 'police',
+        lat:  48.2173193997682,
+        lng: 16.368301237044264,
+        name: "Polizeiinspektion Innere Stadt",
+        address: "Deutschmeisterpl. 3, 1010 Wien",
+        phone: "133 (Notruf) / +43 1 31310-0",
+        hours: "24/7",
+        website: "https://www.polizei.gv.at"
+    },
+    {
+        type: 'police',
+        lat: 48.19720629549691, 
+        lng: 16.353153596869067,
+        name: "Polizeiinspektion Mariahilf",
+        address: "Kopernikusgasse 1, 1060 Wien",
+        phone: "133 (Notruf) / +43 1 31310-0",
+        hours: "24/7",
+        website: "https://www.polizei.gv.at"
+    },
+    {
+        type: 'police',
+        lat: 48.18834202463845,  
+        lng: 16.35785331379503, 
+        name: "Polizeikommissariat Margareten ",
+        address: "Viktor-Christ-Gasse 19, 1050 Wien",
+        phone: "133 (Notruf) / +43 1 31310-0",
+        hours: "24/7",
+        website: "https://www.polizei.gv.at"
+    },
+    {
+        type: 'police',
+        lat: 48.26050099056446,
+        lng: 16.397613703002577, 
+        name: "Polizeikommissariat Floridsdorf ",
+        address: "Hermann-Bahr-Straße 3, 1210 Wien",
+        phone: "133 (Notruf) / +43 1 31310-0",
+        hours: "24/7",
+        website: "https://www.polizei.gv.at"
+    },
 
-            // Krankenhäuser
-            {
-                type: 'hospital',
-                lat: 48.2182, 
-                lng: 16.3938, 
-                name: "AKH Wien",
-                address: "Währinger Gürtel 18-20, 1090 Wien",
-                phone: "+43 1 40400-0",
-                hours: "24/7 Notaufnahme",
-                website: "https://www.akhwien.at"
-            },
-            {
-                type: 'hospital',
-                lat: 48.1882, 
-                lng: 16.3638, 
-                name: "Krankenhaus Rudolfstiftung",
-                address: "Juchgasse 25, 1030 Wien",
-                phone: "+43 1 71165-0",
-                hours: "24/7 Notaufnahme",
-                website: "https://www.wienkav.at/rudolfstiftung"
-            },
-            {
-                type: 'hospital',
-                lat: 48.1901, 
-                lng: 16.3377, 
-                name: "Krankenhaus Hietzing",
-                address: "Wolkersbergenstraße 1, 1130 Wien",
-                phone: "+43 1 80110-0",
-                hours: "24/7 Notaufnahme",
-                website: "https://www.wienkav.at/khr"
-            },
-            {
-                type: 'hospital',
-                lat: 48.2298, 
-                lng: 16.4023, 
-                name: "SMZ Ost - Donauspital",
-                address: "Langobardenstraße 122, 1220 Wien",
-                phone: "+43 1 28802-0",
-                hours: "24/7 Notaufnahme",
-                website: "https://www.wienkav.at/smz-ost"
-            },
-            {
-                type: 'hospital',
-                lat: 48.1851,
-                lng: 16.3594,
-                name: "Franziskus Spital Margareten",
-                address: "Nikolsdorfergasse 32, 1050 Wien",
-                phone: "+43 1 59988-0",
-                hours: "24/7 Notaufnahme",
-                website: "https://www.franziskusspital.at"
-            },
+    // Krankenhäuser
+    {
+        type: 'hospital',
+        lat:  48.220885, 
+        lng: 16.346810, 
+        name: "AKH Wien",
+        address: "Währinger Gürtel 18-20, 1090 Wien",
+        phone: "+43 1 40400-0",
+        hours: "24/7 Notaufnahme",
+        website: "https://www.akhwien.at"
+    },
+    {
+        type: 'hospital',
+        lat: 48.196258, 
+        lng: 16.390711, 
+        name: "Klinik Landstraße",
+        address: "Juchgasse 25, 1030 Wien",
+        phone: "+43 1 71165-0",
+        hours: "24/7 Notaufnahme",
+        website: "https://www.wienkav.at/rudolfstiftung"
+    },
+    {
+        type: 'hospital',
+        lat: 48.173069260035966, 
+        lng: 16.27591903133364, 
+        name: "Krankenhaus Hietzing",
+        address: "Wolkersbergenstraße 1, 1130 Wien",
+        phone: "+43 1 80110-0",
+        hours: "24/7 Notaufnahme",
+        website: "https://www.wienkav.at/khr"
+    },
+    {
+        type: 'hospital',
+        lat: 48.219262, 
+        lng: 16.464519, 
+        name: "SMZ Ost - Donauspital",
+        address: "Langobardenstraße 122, 1220 Wien",
+        phone: "+43 1 28802-0",
+        hours: "24/7 Notaufnahme",
+        website: "https://www.wienkav.at/smz-ost"
+    },
+    {
+        type: 'hospital',
+        lat: 48.187914793715535,
+        lng: 16.36201452570439,
+        name: "Franziskus Spital Margareten",
+        address: "Nikolsdorfergasse 32, 1050 Wien",
+        phone: "+43 1 59988-0",
+        hours: "24/7 Notaufnahme",
+        website: "https://www.franziskusspital.at"
+    },
 
-            // Feuerwehrstationen
-            {
-                type: 'fire',
-                lat: 48.2282, 
-                lng: 16.3838, 
-                name: "Hauptfeuerwache Am Hof",
-                address: "Am Hof 9, 1010 Wien",
-                phone: "122 (Notruf) / +43 1 531 99-0",
-                hours: "24/7",
-                website: "https://www.wien.gv.at/kontakte/ma68"
-            },
-            {
-                type: 'fire',
-                lat: 48.1782, 
-                lng: 16.3438, 
-                name: "Feuerwache Donaustadt",
-                address: "Deutsch-Wagram-Straße 31, 1220 Wien",
-                phone: "122 (Notruf) / +43 1 531 99-0",
-                hours: "24/7",
-                website: "https://www.wien.gv.at/kontakte/ma68"
-            },
-            {
-                type: 'fire',
-                lat: 48.2461, 
-                lng: 16.4218, 
-                name: "Hauptfeuerwache Floridsdorf",
-                address: "Brünner Straße 129, 1210 Wien",
-                phone: "122 (Notruf) / +43 1 531 99-0",
-                hours: "24/7",
-                website: "https://www.wien.gv.at/kontakte/ma68"
-            },
-            {
-                type: 'fire',
-                lat: 48.1654, 
-                lng: 16.3817, 
-                name: "Hauptfeuerwache Favoriten",
-                address: "Arsenalstraße 1, 1100 Wien",
-                phone: "122 (Notruf) / +43 1 531 99-0",
-                hours: "24/7",
-                website: "https://www.wien.gv.at/kontakte/ma68"
-            }
-        ];
+    // Feuerwehrstationen
+    {
+        type: 'fire',
+        lat: 48.21193930993583, 
+        lng: 16.36789896803411,
+        name: "Hauptfeuerwache Am Hof",
+        address: "Am Hof 9, 1010 Wien",
+        phone: "122 (Notruf) / +43 1 531 99-0",
+        hours: "24/7",
+        website: "https://www.wien.gv.at/kontakte/ma68"
+    },
+    {
+        type: 'fire',
+        lat: 48.22654258893368,
+        lng:  16.46197645454253, 
+        name: "Berufsfeuerwehr Wien - Feuerwache Donaustadt",
+        address: "Erzherzog-Karl-Straße 170, 1220 Wien",
+        phone: "122 (Notruf) / +43 1 531 99-0",
+        hours: "24/7",
+        website: "https://www.wien.gv.at/kontakte/ma68"
+    },
+    {
+        type: 'fire',
+        lat: 48.26469012614988, 
+        lng: 16.429921212938925, 
+        name: "Hauptfeuerwache Floridsdorf",
+        address: "Josef-Brazdovics-Straße 4, 1210 Wien",
+        phone: "122 (Notruf) / +43 1 531 99-0",
+        hours: "24/7",
+        website: "https://www.wien.gv.at/kontakte/ma68"
+    },
+    {
+        type: 'fire',
+        lat: 48.182238182533915, 
+        lng: 16.37793764104742, 
+        name: "Hauptfeuerwache Favoriten",
+        address: "Sonnwendgasse 14, 1100 Wien",
+        phone: "122 (Notruf) / +43 1 531 99-0",
+        hours: "24/7",
+        website: "https://www.wien.gv.at/kontakte/ma68"
+    }
+];
 
         const markers = [];
 
         // Popup-Template
         function createPopupContent(location) {
-            // Kodiere die Adresse für die URL
-            const encodedAddress = encodeURIComponent(location.address);
+            // Erstelle einen Google Maps Link mit der genauen Adresse
+            const formattedAddress = encodeURIComponent(location.address);
+            const googleMapsUrl = `https://www.google.com/maps/dir//${formattedAddress}`;
             
             return `
                 <div class="marker-popup">
@@ -518,8 +530,8 @@
                     <p><strong>Öffnungszeiten:</strong> ${location.hours}</p>
                     <p>
                         <a href="${location.website}" target="_blank">Website besuchen</a> |
-                        <a href="https://www.google.com/maps/search/?api=1&query=${encodedAddress}" target="_blank">
-                            Route planen
+                        <a href="${googleMapsUrl}" target="_blank">
+                            Route planen 🚗
                         </a>
                     </p>
                 </div>
@@ -546,18 +558,17 @@
         function searchLocation() {
             const address = document.getElementById('address-search').value;
             const hint = document.getElementById('search-hint');
+            
             if (!address) {
-                hint.style.display = 'block';
-                hint.innerText = 'Bitte geben Sie eine Adresse ein.';
+                alert('Bitte geben Sie eine Adresse ein.');
                 return;
-            } else {
-                hint.style.display = 'none';
             }
 
-            // Füge 'Wien' zur Suche hinzu, falls nicht vorhanden
-            const searchQuery = address.toLowerCase().includes('wien') ? address : `${address}, Wien, Österreich`;
+            // Füge "Wien, Österreich" zur Suche hinzu
+            const searchQuery = `${address}, Wien, Österreich`;
 
-            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}`)
+            // Nominatim API Anfrage
+            fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}&limit=1`)
                 .then(response => response.json())
                 .then(data => {
                     if (data && data.length > 0) {
@@ -565,55 +576,65 @@
                         const lat = parseFloat(location.lat);
                         const lng = parseFloat(location.lon);
 
-                        // Setze Kartenansicht auf gefundene Position
-                        map.setView([lat, lng], 15);
+                        // Entferne vorherige Suchmarker falls vorhanden
+                        if (window.searchMarker) {
+                            map.removeLayer(window.searchMarker);
+                        }
 
-                        // Markiere die Suchadresse
-                        const searchMarker = L.marker([lat, lng], {
+                        // Setze die Kartenansicht
+                        map.setView([lat, lng], 14);
+
+                        // Füge den Suchmarker hinzu
+                        window.searchMarker = L.marker([lat, lng], {
                             icon: L.icon({
-                                iconUrl: '../images/Suchemarker_backgroundless.png', // Optional: Spezieller Marker für die Suche
-                                iconSize: [60, 60]
+                                iconUrl: '../images/Suchemarker_backgroundless.png', // Icon auf Suchemarker geändert
+                                iconSize: [60, 60],  // Größe angepasst
+                                iconAnchor: [30, 30] // Anker auf die Mitte des Icons setzen
                             })
                         }).addTo(map);
 
-                        // Finde die nächstgelegenen Stationen
-                        const nearestLocations = findNearestLocations(lat, lng, 3);
+                        // Zeige den Hinweis an
+                        hint.style.display = 'block';
 
-                        // Setze alle Marker auf halbtransparent
-                        markers.forEach(({ marker }) => {
-                            marker.setOpacity(0.3);
-                        });
-
-                        // Hebe die nächsten Stationen hervor
-                        nearestLocations.forEach(loc => {
-                            const marker = markers.find(m => 
-                                m.marker.getLatLng().lat === loc.lat && 
-                                m.marker.getLatLng().lng === loc.lng
-                            );
-                            if (marker) {
-                                marker.marker.setOpacity(1);
-                                marker.marker.openPopup();
-                            }
-                        });
-
-                        // Zeige Erfolgsmeldung
-                        alert(`Nächste ${nearestLocations.length} Notfallstationen wurden gefunden und markiert.`);
+                        // Zeige die drei nächstgelegenen Stationen
+                        showNearestLocations(lat, lng);
                     } else {
                         alert('Adresse konnte nicht gefunden werden. Bitte überprüfen Sie Ihre Eingabe.');
                     }
                 })
                 .catch(error => {
-                    console.error('Fehler bei der Adresssuche:', error);
+                    console.error('Fehler bei der Suche:', error);
                     alert('Es gab einen Fehler bei der Suche. Bitte versuchen Sie es erneut.');
                 });
         }
 
-        // Event-Listener für die Eingabetaste
-        document.getElementById('address-search').addEventListener('keypress', function(e) {
-            if (e.key === 'Enter') {
-                searchLocation();
-            }
-        });
+        // Neue Funktion zum Anzeigen der nächstgelegenen Stationen
+function showNearestLocations(lat, lng) {
+    const nearest = findNearestLocations(lat, lng, 3);
+    
+    // Setze alle Marker auf normal
+    markers.forEach(({ marker }) => {
+        marker.setOpacity(1);
+    });
+
+    // Hervorheben der nächsten Stationen
+    nearest.forEach(location => {
+        const marker = markers.find(m => 
+            m.marker.getLatLng().lat === location.lat && 
+            m.marker.getLatLng().lng === location.lng
+        );
+        if (marker) {
+            marker.marker.openPopup();
+        }
+    });
+}
+
+// Event-Listener für die Eingabetaste
+document.getElementById('address-search').addEventListener('keypress', function(e) {
+    if (e.key === 'Enter') {
+        searchLocation();
+    }
+});
 
         // Funktion zum Finden der nächstgelegenen Stationen
         function findNearestLocations(lat, lng, limit = 3) {
@@ -683,6 +704,31 @@ filterButtons.forEach(button => {
         }
     });
 });
+
+// URL-Parameter verarbeiten
+const urlParams = new URLSearchParams(window.location.search);
+const lat = urlParams.get('lat');
+const lon = urlParams.get('lon');
+const zoom = urlParams.get('zoom');
+const address = urlParams.get('address');
+
+// Wenn Koordinaten in der URL sind, karte darauf zentrieren
+if (lat && lon) {
+    map.setView([lat, lon], zoom || 16);
+    
+    // Marker für die gesuchte Adresse setzen
+    const searchMarker = L.marker([lat, lon], {
+        icon: L.icon({
+            iconUrl: '../images/Suchemarker_backgroundless.png', // Icon auf Suchemarker geändert
+            iconSize: [60, 60],  // Größe angepasst
+            iconAnchor: [30, 30] // Anker auf die Mitte des Icons setzen
+        })
+    }).addTo(map);
+
+    if (address) {
+        searchMarker.bindPopup(`Gesuchte Adresse:<br>${address}`).openPopup();
+    }
+}
     </script>
 </body>
 </html>

@@ -425,6 +425,25 @@
                 return;
             }
 
+            // Prüfen ob es eine Adresssuche ist (enthält Straße, Gasse, etc.)
+            const addressKeywords = ['straße', 'gasse', 'platz', 'weg', 'allee'];
+            const isAddressSearch = addressKeywords.some(keyword => query.includes(keyword));
+
+            if (isAddressSearch) {
+                // Fügen Sie einen speziellen Eintrag für die Adresssuche hinzu
+                const li = document.createElement("li");
+                li.innerHTML = `
+                    <div class="search-result">
+                        <strong>🗺️ Adresse auf der Karte anzeigen</strong><br>
+                        <small>"${query}" auf der Notfallkarte suchen</small>
+                    </div>
+                `;
+                li.addEventListener("click", () => navigateToAddress(query));
+                dropdownList.appendChild(li);
+                dropdown.style.display = "block";
+                return;
+            }
+
             const results = data.filter(item => 
                 item.name.toLowerCase().includes(query) || 
                 item.description.toLowerCase().includes(query) ||
@@ -463,6 +482,28 @@
         function highlightMatch(text, query) {
             const regex = new RegExp(`(${query})`, 'gi');
             return text.replace(regex, '<mark>$1</mark>');
+        }
+
+        async function navigateToAddress(query) {
+            try {
+                // Füge "Wien, Österreich" zur Suche hinzu für bessere Ergebnisse
+                const searchQuery = `${query}, Wien, Österreich`;
+                
+                // Nominatim API Anfrage
+                const response = await fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(searchQuery)}&limit=1`);
+                const data = await response.json();
+
+                if (data && data.length > 0) {
+                    const location = data[0];
+                    // Weiterleitung zur Notfallkarte mit Koordinaten
+                    window.location.href = `notfallskarte.html?lat=${location.lat}&lon=${location.lon}&zoom=16&address=${encodeURIComponent(query)}`;
+                } else {
+                    alert('Adresse konnte nicht gefunden werden. Bitte überprüfen Sie Ihre Eingabe.');
+                }
+            } catch (error) {
+                console.error('Fehler bei der Adresssuche:', error);
+                alert('Es gab einen Fehler bei der Suche. Bitte versuchen Sie es erneut.');
+            }
         }
 
         // Event Listener für den Such-Button - KORRIGIERT
