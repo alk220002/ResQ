@@ -254,6 +254,39 @@
             font-weight: bold;
         }
 
+        .nearest-stations {
+            background-color: #fff;
+            padding: 15px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: 2px solid #ff6f61;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .nearest-stations h3 {
+            color: #ff6f61;
+            margin: 0 0 10px 0;
+        }
+
+        .nearest-stations ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .nearest-stations li {
+            padding: 8px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .nearest-stations li:last-child {
+            border-bottom: none;
+        }
+
+        .station-type-icon {
+            margin-right: 8px;
+        }
+
         /* Responsive Design */
 @media (max-width: 768px) {
     .map-container {
@@ -291,6 +324,12 @@
         </ul>
     </nav>
     
+    <!-- Nach dem navbar -->
+    <div id="popup-message" class="popup-message">
+        <p>Die nächsten Notfallstationen wurden gefunden.</p>
+        <button class="ok-button" onclick="closePopup()">Ok</button>
+    </div>
+    
     <main>
         <h1>Notfallskarte Wien</h1>
         <div class="search-container">
@@ -300,6 +339,10 @@
         <div id="search-hint" class="search-hint" style="display: none;">
             ⚠️ Hinweis: Bitte nach der Suche herauszoomen, um alle umliegenden Notfallstationen zu sehen!
         </div>
+        <div id="nearest-stations" class="nearest-stations" style="display: none;">
+    <h3>🎯 Nächstgelegene Notfallstationen:</h3>
+    <ul id="stations-list"></ul>
+</div>
         <div class="map-container">
             <div id="map"></div>
             <div class="filter-container">
@@ -392,7 +435,7 @@
         type: 'police',
         lat: 48.19720629549691, 
         lng: 16.353153596869067,
-        name: "Polizeiinspektion Mariahilf",
+        name: "Polizeistation Kopernikusgasse",
         address: "Kopernikusgasse 1, 1060 Wien",
         phone: "133 (Notruf) / +43 1 31310-0",
         hours: "24/7",
@@ -612,13 +655,35 @@
 function showNearestLocations(lat, lng) {
     const nearest = findNearestLocations(lat, lng, 3);
     
-    // Setze alle Marker auf normal
-    markers.forEach(({ marker }) => {
-        marker.setOpacity(1);
-    });
-
-    // Hervorheben der nächsten Stationen
+    // Pop-Up anzeigen
+    const popup = document.getElementById('popup-message');
+    popup.style.display = 'block';
+    
+    // Liste aktualisieren
+    const stationsList = document.getElementById('stations-list');
+    const nearestStations = document.getElementById('nearest-stations');
+    stationsList.innerHTML = '';
+    
+    // Für jede Station einen Listeneintrag erstellen
     nearest.forEach(location => {
+        // Icon basierend auf Stationstyp wählen
+        const icon = location.type === 'police' ? '👮' :
+                    location.type === 'hospital' ? '🏥' : '🚒';
+                    
+        // Distanz in km (auf 100m gerundet)
+        const distance = Math.round(location.distance * 10) / 10;
+        
+        // Listeneintrag erstellen
+        const li = document.createElement('li');
+        li.innerHTML = `
+            <span class="station-type-icon">${icon}</span>
+            <strong>${location.name}</strong> (${distance} km)
+            <br>
+            <small>${location.address}</small>
+        `;
+        stationsList.appendChild(li);
+        
+        // Marker auf der Karte hervorheben
         const marker = markers.find(m => 
             m.marker.getLatLng().lat === location.lat && 
             m.marker.getLatLng().lng === location.lng
@@ -627,6 +692,9 @@ function showNearestLocations(lat, lng) {
             marker.marker.openPopup();
         }
     });
+    
+    // Ergebnisliste anzeigen
+    nearestStations.style.display = 'block';
 }
 
 // Event-Listener für die Eingabetaste
@@ -729,6 +797,36 @@ if (lat && lon) {
         searchMarker.bindPopup(`Gesuchte Adresse:<br>${address}`).openPopup();
     }
 }
+    </script>
+
+    <div class="popup-message" id="popup-message">
+        <p>Die Karte wurde erfolgreich geladen!</p>
+        <button class="ok-button" onclick="closePopup()">OK</button>
+    </div>
+
+    <script>
+        // Popup nach 2 Sekunden automatisch schließen
+        setTimeout(() => {
+            const popup = document.getElementById('popup-message');
+            if (popup) {
+                popup.style.display = 'flex';
+            }
+        }, 2000);
+
+        function closePopup() {
+            document.getElementById('popup-message').style.display = 'none';
+        }
+
+        // Pop-Up auch beim Klicken außerhalb schließen
+document.addEventListener('click', function(event) {
+    const popup = document.getElementById('popup-message');
+    const isClickInsidePopup = popup.contains(event.target);
+    
+    if (!isClickInsidePopup && popup.style.display === 'block' 
+        && !event.target.matches('#address-search, #address-search *')) {
+        closePopup();
+    }
+});
     </script>
 </body>
 </html>
